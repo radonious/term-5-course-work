@@ -11,13 +11,13 @@
    <children>
       <ChoiceBox fx:id="choiceVersion" layoutX="73.0" layoutY="24.0" prefWidth="150.0" />
       <TextArea fx:id="fileTextArea" focusTraversable="false" layoutX="20.0" layoutY="130.0" prefHeight="182.0" prefWidth="554.0" />
-      <Button layoutX="292.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#SaveVersionOnClicked" prefHeight="25.0" prefWidth="89.0" text="Save Version" />
+      <Button layoutX="485.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#SaveVersionOnClicked" prefHeight="25.0" prefWidth="89.0" text="Save Version" />
       <TextField fx:id="versionNameTextField" layoutX="131.0" layoutY="327.0" />
       <Label layoutX="21.0" layoutY="331.0" text="New version name:" />
       <Label layoutX="21.0" layoutY="68.0" text="File name:" />
       <Label fx:id="fileNameLabel" layoutX="81.0" layoutY="68.0" text="None" />
       <Label layoutX="19.0" layoutY="28.0" text="Version:" />
       <Label layoutX="21.0" layoutY="104.0" text="File preview:" />
-      <Button layoutX="508.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#saveTextOnClicked" text="Save Text" />
+      <Button fx:id="removeVersionButton" disable="true" layoutX="235.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#removeVersionOnClicked" text="Remove" />
    </children>
 </Pane>
