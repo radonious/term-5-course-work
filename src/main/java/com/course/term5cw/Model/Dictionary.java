@@ -1,13 +1,25 @@
 package com.course.term5cw.Model;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-public class Dictionary {
+public class Dictionary implements Serializable {
     // Map contains: Adapter.class -> Word)
-    private HashMap<String, Adapter> map = new HashMap<>();
+    private HashMap<String, Adapter> dict;
+
+    public Dictionary() {
+        dict = new HashMap<>();
+    }
+
+    public Dictionary(HashMap<String, Adapter> map) {
+        dict = map;
+    }
+
+    public HashMap<String, Adapter> getDict() {
+        return dict;
+    }
 
     // Fill the map, change counters and return text as adapters array
     public ArrayList<Adapter> addVersion(File file) throws Exception {
@@ -22,15 +34,15 @@ public class Dictionary {
             split.removeIf(String::isBlank);
             split.add("\n");
             for (String s : split) {
-                if (map.get(s) != null) {
-                    map.get(s).count++;
+                if (dict.get(s) != null) {
+                    dict.get(s).count++;
                 } else {
                     Adapter a = new Adapter();
                     a.count++;
-                    map.put(s, a);
+                    dict.put(s, a);
                 }
                 // Add adapter to the result array
-                res.add(map.get(s));
+                res.add(dict.get(s));
             }
         }
         input.close();
@@ -43,13 +55,13 @@ public class Dictionary {
             adapter.count--;
             // OPTIONAL: delete word from dictionary if count = 0
             if (adapter.count == 0) {
-                map.remove(getWordByAdapter(adapter));
+                dict.remove(getWordByAdapter(adapter));
             }
         }
     }
 
     public String getWordByAdapter(Adapter adapter) {
-        for (Map.Entry<String, Adapter> i : map.entrySet()) {
+        for (Map.Entry<String, Adapter> i : dict.entrySet()) {
             if (adapter.equals(i.getValue())) {
                 return i.getKey();
             }
@@ -58,9 +70,9 @@ public class Dictionary {
     }
 
     public void printDict() {
-        Set<String> keys = map.keySet();
+        Set<String> keys = dict.keySet();
         for (String key : keys) {
-            System.out.println(key + " : " + map.get(key).count);
+            System.out.println(key + " : " + dict.get(key).count);
         }
     }
 }
