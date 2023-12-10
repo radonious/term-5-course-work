@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="368.0" prefWidth="593.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.term5cw.Controller.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="339.0" prefWidth="593.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.course.term5cw.Controller.Controller">
    <children>
-      <ChoiceBox fx:id="choiceVersion" layoutX="73.0" layoutY="24.0" prefWidth="150.0" />
-      <TextArea fx:id="fileTextArea" focusTraversable="false" layoutX="20.0" layoutY="130.0" prefHeight="182.0" prefWidth="554.0" />
-      <Button layoutX="485.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#SaveVersionOnClicked" prefHeight="25.0" prefWidth="89.0" text="Save Version" />
-      <TextField fx:id="versionNameTextField" layoutX="131.0" layoutY="327.0" />
-      <Label layoutX="21.0" layoutY="331.0" text="New version name:" />
-      <Label layoutX="21.0" layoutY="68.0" text="File name:" />
-      <Label fx:id="fileNameLabel" layoutX="81.0" layoutY="68.0" text="None" />
-      <Label layoutX="19.0" layoutY="28.0" text="Version:" />
-      <Label layoutX="21.0" layoutY="104.0" text="File preview:" />
-      <Button fx:id="removeVersionButton" disable="true" layoutX="235.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#removeVersionOnClicked" text="Remove" />
-      <ProgressIndicator fx:id="updateIndicator" layoutX="525.0" layoutY="253.0" progress="0.0" />
+      <TextArea fx:id="fileTextArea" editable="false" focusTraversable="false" layoutX="20.0" layoutY="102.0" prefHeight="182.0" prefWidth="554.0" />
+      <Button layoutX="485.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#SaveVersionOnClicked" prefHeight="25.0" prefWidth="89.0" text="Save Version" />
+      <Label layoutX="21.0" layoutY="44.0" text="File name:" />
+      <Label fx:id="fileNameLabel" layoutX="81.0" layoutY="44.0" text="None" />
+      <Label layoutX="22.0" layoutY="12.0" text="Version:" />
+      <Label layoutX="21.0" layoutY="76.0" text="File preview:" />
+      <Button fx:id="removeVersionButton" disable="true" layoutX="108.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#removeVersionOnClicked" text="Remove" />
+      <ProgressIndicator fx:id="updateIndicator" layoutX="525.0" layoutY="225.0" progress="0.0" />
+      <Button fx:id="nextVersionButton" layoutX="63.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#nextButtonOnClicked" text="--&gt;" />
+      <Button fx:id="prevVersionButton" layoutX="19.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#prevButtonOnClicked" text="&lt;--" />
+      <Label layoutX="440.0" layoutY="28.0" prefHeight="17.0" prefWidth="34.0" />
+      <Label fx:id="versionLabel" layoutX="71.0" layoutY="12.0" text="None" />
+      <Button layoutX="403.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#loadJsonOnClicked" text="Load JSON" />
    </children>
 </Pane>

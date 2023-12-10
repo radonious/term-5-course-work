@@ -1,12 +1,11 @@
 package com.course.term5cw.Common;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.TimerTask;
 
 public abstract class FileWatcher extends TimerTask {
     private long timeStamp;
-    private File file;
+    private final File file;
 
     public FileWatcher(File file) {
         this.file = file;
@@ -23,5 +22,5 @@ public abstract class FileWatcher extends TimerTask {
         }
     }
 
-    protected abstract void onChange( File file );
+    protected abstract void onChange( File f );
 }

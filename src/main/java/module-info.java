@@ -4,8 +4,14 @@ module com.course.term5cw {
 
     requires org.kordamp.bootstrapfx.core;
 
-    exports com.course.term5cw.Controller;
+    requires com.fasterxml.jackson.databind;
+
+    requires io.github.javadiffutils;
+
     opens com.course.term5cw.Controller to javafx.fxml;
 
+    exports com.course.term5cw.Controller;
     exports com.course.term5cw.View;
+    exports com.course.term5cw.Model;
+    exports com.course.term5cw.Common;
 }

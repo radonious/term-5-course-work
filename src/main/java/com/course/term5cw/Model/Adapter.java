@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 public class Adapter implements Serializable {
 
+    // Number of occurrences of a word in all versions of the file
+    private Integer count;
+
     public Adapter() {
         count = 0;
     }
@@ -12,6 +15,15 @@ public class Adapter implements Serializable {
         count = num;
     }
 
-    // Number of occurrences of a word in all versions of the file
-    public Integer count;
+    public void plus() {
+        count++;
+    }
+
+    public void minus() {
+        count--;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
 }
