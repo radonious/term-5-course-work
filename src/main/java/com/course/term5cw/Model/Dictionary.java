@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.function.Predicate;
 
 public class Dictionary implements Serializable {
     // Map: Dictionary of words and it's adapters (flyweights)
@@ -119,6 +120,12 @@ public class Dictionary implements Serializable {
         return res;
     }
 
+    public static void main(String[] args) {
+        List.of("1 12 1235 - 1234 , 666 . 777. :4321".trim().split(
+                "(?<=[!\"#$%&()*+-,./:;<=>?@^_`{|}~])|(?=[!\"#$%&()*+-,./:;<=>?@^_`{|}~])| "
+        )).forEach(e -> System.out.println(e.length() + " :" + e));
+    }
+
     // Add new version to versions list
     public void addVersion(File file) throws Exception {
         // Iterate to latest version to add a new one
@@ -130,10 +137,16 @@ public class Dictionary implements Serializable {
         Scanner in = new Scanner(file, StandardCharsets.UTF_8);
         while (in.hasNextLine()) {
             if (!fileTextVersion.isEmpty()) fileTextVersion.add("\\n");
-            fileTextVersion.addAll(List.of(in.nextLine().trim().split(
+            ArrayList<String> tmp = new ArrayList<String>(List.of(in.nextLine().trim().split(
                     "(?<=[!\"#$%&()*+-,./:;<=>?@^_`{|}~])|(?=[!\"#$%&()*+-,./:;<=>?@^_`{|}~])| "
             )));
+            // Remove empty and whitespace elements
+            tmp.removeIf(str -> str.isEmpty() | str.equals(" "));
+            fileTextVersion.addAll(tmp);
         }
+
+        // Elements may have whitespaces, so trim
+        fileTextVersion.replaceAll(String::trim);
 
         // Update dictionary with new version of text
         fileTextVersion.forEach(this::plusCounter);
@@ -150,8 +163,6 @@ public class Dictionary implements Serializable {
         // Update text version and offset
         currentTextVersion = fileTextVersion;
         versionOffset = 0;
-
-        printDict(); // DEBUG
     }
 
     // Remove current version from versions list (delete all versions after current)
@@ -180,29 +191,27 @@ public class Dictionary implements Serializable {
             versionOffset = 0;
             currentTextVersion.clear();
         }
-
-        printDict(); // DEBUG
     }
 
-//    public void printDict() {
-//        System.out.println("Dictionary:");
-//        Set<String> keys = dict.keySet();
-//        for (String key : keys) {
-//            System.out.println(key + " : " + dict.get(key).getCount());
-//        }
-//    }
-
-    // Print full dictionary map
     public void printDict() {
+        System.out.println("Dictionary:");
+        Set<String> keys = dict.keySet();
+        for (String key : keys) {
+            System.out.println(key + " : " + dict.get(key).getCount());
+        }
+    }
+
+    public void printAll() {
         System.out.println("Dictionary:");
         Set<String> keys = dict.keySet();
         for (String key : keys) {
             System.out.println(key + " : " + dict.get(key));
         }
+        System.out.println("Versions size: " + versions.size());
+        System.out.println("Current version offset: " + versionOffset);
         System.out.println("Versions:");
-        System.out.println(versions.size());
         versions.forEach(e -> e.forEach(f -> System.out.println(f.getAdapters())));
-        System.out.println(versionOffset);
+        System.out.println("Current text:");
         System.out.println(currentTextVersion.toString());
     }
 
@@ -272,6 +281,7 @@ public class Dictionary implements Serializable {
 
     //  Process operation to restore previous version
     public void prevVersion() {
+        printAll();
         for (OperationUnit operation : getPrevOperations()) {
             if (operation.getType() == Operation.INSERT) {
                 if (operation.getTargetPosition() >= currentTextVersion.size()) {
@@ -294,6 +304,7 @@ public class Dictionary implements Serializable {
     public String getText() {
         StringBuffer buffer = new StringBuffer();
         for (String str : currentTextVersion) {
+            if (str == null) continue;
             if (str.equals("\\n")) {
                 buffer.append("\n");
             } else {
@@ -358,7 +369,7 @@ public class Dictionary implements Serializable {
                 for (int i = 0; i < unit.getAdapters().size(); ++i) {
                     String word = unit.getAdapters_words().get(i);
                     plusCounter(word);
-                    unit.getAdapters().set(i, dict.get(word));
+                    unit.getAdapters().add(i, dict.get(word));
                 }
             }
         }

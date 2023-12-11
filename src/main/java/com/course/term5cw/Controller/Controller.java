@@ -155,7 +155,7 @@ public class Controller implements Serializable {
     public synchronized void manageUI() throws IOException {
         fileTextArea.clear();
         fileTextArea.setText(fabric.getText());
-        FileWriter out = new FileWriter(file);
+        FileWriter out = new FileWriter(file, StandardCharsets.UTF_8);
         out.write(fabric.getText());
         out.close();
         manageVersionNumber();
@@ -180,7 +180,7 @@ public class Controller implements Serializable {
         String json = fabric.generateJSON();
         if (!json.isEmpty()) {
             File f = new File(file.getName() + ".json");
-            FileWriter out = new FileWriter(f);
+            FileWriter out = new FileWriter(f, StandardCharsets.UTF_8);
             out.write(json);
             out.close();
         }
