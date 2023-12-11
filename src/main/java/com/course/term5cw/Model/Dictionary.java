@@ -281,7 +281,6 @@ public class Dictionary implements Serializable {
 
     //  Process operation to restore previous version
     public void prevVersion() {
-        printAll();
         for (OperationUnit operation : getPrevOperations()) {
             if (operation.getType() == Operation.INSERT) {
                 if (operation.getTargetPosition() >= currentTextVersion.size()) {

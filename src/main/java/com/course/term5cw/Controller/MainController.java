@@ -95,7 +95,6 @@ public class MainController {
         out.close();
     }
 
-
     @FXML
     void allToBinary(MouseEvent event) throws IOException {
         // Create bin file writer

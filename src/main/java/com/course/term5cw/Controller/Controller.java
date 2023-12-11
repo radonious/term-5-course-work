@@ -16,10 +16,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class Controller implements Serializable {
 
@@ -28,6 +25,9 @@ public class Controller implements Serializable {
 
     // Model and fabric to work with versions
     private Dictionary fabric = new Dictionary();
+
+    // List of text versions to compare flyweight efficiency
+    private ArrayList<String> compare = new ArrayList<>();
 
     @FXML
     private transient Label fileNameLabel;
@@ -129,6 +129,7 @@ public class Controller implements Serializable {
     @FXML
     void SaveVersionOnClicked(MouseEvent event) throws Exception {
         fabric.addVersion(file);
+        compare.add(fabric.getText());
         manageUI();
         saveJSON();
     }
@@ -136,6 +137,7 @@ public class Controller implements Serializable {
     @FXML
     void removeVersionOnClicked(MouseEvent event) throws IOException {
         fabric.removeVersion();
+        compare.remove((int) fabric.getCurrentVersionIndex());
         manageUI();
         saveJSON();
     }

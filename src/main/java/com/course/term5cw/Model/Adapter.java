@@ -11,10 +11,6 @@ public class Adapter implements Serializable {
         count = 0;
     }
 
-    public Adapter(Integer num) {
-        count = num;
-    }
-
     public void plus() {
         count++;
     }
